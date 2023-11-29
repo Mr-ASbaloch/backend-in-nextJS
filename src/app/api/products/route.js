@@ -17,7 +17,11 @@
 import { NextResponse } from "next/server";
 import mongoose from "mongoose";
 import { connectionStr } from "@/lib/db";
-import { product } from "@/lib/model/product";
+import { product} from "@/lib/model/product";
+
+
+
+//get method 
 
 export async function GET(request) {
   try {
@@ -36,4 +40,25 @@ export async function GET(request) {
     console.error(error);
     return NextResponse.error("Internal Server Error", 500);
   }
+
+}
+
+
+//post method 
+
+export async function POST (){
+
+  await mongoose.connect (connectionStr)
+
+  const newProduct = new product({
+    "name": "note 10 ",
+    "price": "12000",
+    "company": "sumsung",
+    "color": "blue",
+    "category": "mobile"
+  })
+
+  const result = await newProduct.save()
+  return NextResponse.json(result)
+
 }
