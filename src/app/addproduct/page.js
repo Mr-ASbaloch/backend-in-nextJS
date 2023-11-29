@@ -8,6 +8,42 @@ const page = () => {
   const [category, setCategory] = useState("");
   const [company, setCompany] = useState("");
 
+  // const addProduct = async () => {
+  //   console.log(name, price, color, company, category);
+  //   let result = await fetch("http://localhost:3000/api/products", {
+  //     method: "post",
+  //     body: JSON.stringify({ name, price, color, company, category }),
+  //   });
+  //   result = await result.json();
+  //   if (result.success) {
+  //     alert("product added ");
+  //   }
+  // };
+  const addProduct = async () => {
+    console.log(name, price, color, company, category);
+    try {
+      let result = await fetch("http://localhost:3000/api/products", {
+        method: "post",
+        body: JSON.stringify({ name, price, color, company, category }),
+      });
+  
+      if (!result.ok) {
+        throw new Error(`HTTP error! Status: ${result.status}`);
+      }
+  
+      result = await result.json();
+  
+      if (result.success) {
+        alert("Product added");
+      } else {
+        alert("Failed to add product");
+      }
+    } catch (error) {
+      console.error("Error during fetch:", error);
+    }
+  };
+  
+
   return (
     <div>
       <div>
@@ -110,9 +146,7 @@ const page = () => {
 
             <div className="flex justify-end mt-6">
               <button
-                onClick={() => {
-                  console.log(name, category, color, company, price);
-                }}
+                onClick={addProduct}
                 className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
               >
                 Add product

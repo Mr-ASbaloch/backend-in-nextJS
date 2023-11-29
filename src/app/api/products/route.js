@@ -46,19 +46,15 @@ export async function GET(request) {
 
 //post method 
 
-export async function POST (){
+// export async function POST (){
 
-  await mongoose.connect (connectionStr)
+//   await mongoose.connect (connectionStr)
 
-  const newProduct = new product({
-    "name": "note 10 ",
-    "price": "12000",
-    "company": "sumsung",
-    "color": "blue",
-    "category": "mobile"
-  })
+//   const newProduct = new product({
+ 
+//   })
 
-  const result = await newProduct.save()
-  return NextResponse.json(result)
+//   const result = await newProduct.save()
+//   return NextResponse.json(result)
 
-}
+// }
